@@ -1,0 +1,44 @@
+<p>product-list-search-component works!</p>
+
+{{errMessage()}}
+
+<p>
+    Min Price:
+    <input type="number" [ngModel]="minPrice()" (ngModelChange)="minPrice.set($event)">
+</p>
+
+<p>
+    Max Price:
+    <input type="number" [ngModel]="maxPrice()" (ngModelChange)="maxPrice.set($event)">
+</p>
+
+<button (click)="onFilter()">Filter with query params</button>
+<button (click)="onFilterWithoutQueryParams()">Filter without query params</button>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Image</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @for (p of filteredProducts(); track p.id) {
+            <tr>
+                <td>{{ p.id }}</td>
+                <td>{{ p.name }}</td>
+                <td>{{ p.price }}</td>
+                <td>
+                    <img [src]="p.image" [alt]="p.name" width="100">
+                </td>
+            </tr>
+        } @empty {
+            <tr>
+                <td colspan="4">No products available.</td>
+            </tr>
+        }
+    </tbody>
+</table>

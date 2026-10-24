@@ -1,0 +1,32 @@
+<p>{{errMessage()}}</p>
+<p>{{message()}}</p>
+
+<table>
+  <tr>
+    <td>Book Id:</td>
+    <td><input type="text" [(ngModel)]="book.BookId"></td>
+  </tr>
+  <tr>
+    <td>Book Name:</td>
+    <td><input type="text" [(ngModel)]="book.BookName"></td>
+  </tr>
+  <tr>
+    <td>Price:</td>
+    <td><input type="number" [(ngModel)]="book.Price"></td>
+  </tr>
+  <tr>
+    <td>Image:</td>
+    <td><input type="file" accept="image/*" (change)="onFileSelected($event)"></td>
+  </tr>
+  @if (imagePreview()) {
+    <tr>
+      <td></td>
+      <td><img [src]="imagePreview()" width="100"></td>
+    </tr>
+  }
+  <tr>
+    <td colspan="2">
+      <button (click)="saveBook()">Add Book</button>
+    </td>
+  </tr>
+</table>

@@ -1,0 +1,42 @@
+<section class="fashion-update">
+  <h2>Update a Fashion</h2>
+
+  <div class="load-row">
+    <label for="fashion-id">Fashion ID</label>
+    <input id="fashion-id" name="fashionId" type="text" [(ngModel)]="fashionId" required />
+    <button type="button" (click)="loadFashion()" [disabled]="isLoading()">
+      {{ isLoading() ? 'Loading…' : 'Load Fashion' }}
+    </button>
+  </div>
+
+  @if (fashion._id) {
+    <form #fashionForm="ngForm" (ngSubmit)="updateFashion()">
+      <label for="fashion-style">Style</label>
+      <input id="fashion-style" name="style" type="text" [(ngModel)]="fashion.style" required maxlength="100" />
+
+      <label for="fashion-subject">Subject</label>
+      <input id="fashion-subject" name="fashion_subject" type="text" [(ngModel)]="fashion.fashion_subject" required maxlength="200" />
+
+      <label for="fashion-detail">Detail</label>
+      <textarea id="fashion-detail" name="fashion_detail" [(ngModel)]="fashion.fashion_detail" required rows="5"></textarea>
+
+      <label for="fashion-image">Replace image (optional)</label>
+      <input id="fashion-image" name="fashion_image_file" type="file" accept="image/*" (change)="onFileSelected($event)" />
+
+      @if (fashion.fashion_image) {
+        <img class="preview" [src]="fashion.getBase64String()" alt="Fashion preview" />
+      }
+
+      <button type="submit" [disabled]="fashionForm.invalid || isSubmitting() || isReadingImage()">
+        {{ isReadingImage() ? 'Reading image…' : isSubmitting() ? 'Updating…' : 'Update Fashion' }}
+      </button>
+    </form>
+  }
+
+  @if (errMessage()) {
+    <p class="error" role="alert">{{ errMessage() }}</p>
+  }
+  @if (statusMessage()) {
+    <p class="success" role="status">{{ statusMessage() }} (ID: {{ fashion._id }})</p>
+  }
+</section>

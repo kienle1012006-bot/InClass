@@ -1,0 +1,38 @@
+<main class="collection-page">
+  <section class="collection-heading">
+    <p class="eyebrow">SLUG FASHION · NEW SEASON</p>
+    <h1>Fashion Collection</h1>
+    <p class="collection-intro">Khám phá những thiết kế được tuyển chọn cho phong cách mỗi ngày.</p>
+  </section>
+
+  @if (errMessage()) {
+    <p class="notice error" role="alert">Không thể tải danh sách Fashion. {{ errMessage() }}</p>
+  }
+
+  @if (!errMessage() && fashions().length === 0) {
+    <p class="notice">Chưa có sản phẩm để hiển thị.</p>
+  }
+
+  <section class="fashion-grid" aria-label="Fashion collection">
+    @for (fashion of fashions(); track fashion._id) {
+      <article class="fashion-card">
+        <a class="card-link" [routerLink]="['/fashion', slugFor(fashion)]" [attr.aria-label]="'Xem ' + fashion.fashion_subject">
+          <div class="image-frame">
+            @if (fashion.fashion_image) {
+              <img [src]="fashion.getBase64String()" [alt]="fashion.fashion_subject" loading="lazy" />
+            } @else {
+              <div class="image-placeholder">SLUG FASHION</div>
+            }
+          </div>
+          <div class="card-copy">
+            <p class="card-style">{{ fashion.style || 'COLLECTION' }}</p>
+            <h2>{{ fashion.fashion_subject }}</h2>
+            <p class="card-detail">{{ fashion.fashion_detail }}</p>
+            <span class="card-slug">/{{ slugFor(fashion) }}</span>
+            <span class="detail-link">Xem chi tiết <span aria-hidden="true">↗</span></span>
+          </div>
+        </a>
+      </article>
+    }
+  </section>
+</main>

@@ -1,0 +1,62 @@
+<section class="fashion-new">
+  <h2>Add a Fashion</h2>
+
+  <form #fashionForm="ngForm" (ngSubmit)="postFashion()">
+    <label for="fashion-style">Style</label>
+    <input
+      id="fashion-style"
+      name="style"
+      type="text"
+      [(ngModel)]="fashion.style"
+      required
+      maxlength="100"
+    />
+
+    <label for="fashion-subject">Subject</label>
+    <input
+      id="fashion-subject"
+      name="fashion_subject"
+      type="text"
+      [(ngModel)]="fashion.fashion_subject"
+      required
+      maxlength="200"
+    />
+
+    <label for="fashion-detail">Detail</label>
+    <textarea
+      id="fashion-detail"
+      name="fashion_detail"
+      [(ngModel)]="fashion.fashion_detail"
+      required
+      rows="5"
+    ></textarea>
+
+    <label for="fashion-image">Image</label>
+    <input
+      id="fashion-image"
+      name="fashion_image"
+      type="file"
+      accept="image/*"
+      (change)="onFileSelected($event)"
+    />
+
+    @if (fashion.fashion_image) {
+      <img class="preview" [src]="fashion.getBase64String()" alt="Fashion preview" />
+    }
+
+    <button type="submit" [disabled]="fashionForm.invalid || isSubmitting() || isReadingImage()">
+      {{ isReadingImage() ? 'Reading image…' : isSubmitting() ? 'Saving…' : 'Submit' }}
+    </button>
+  </form>
+
+  @if (errMessage()) {
+    <p class="error" role="alert">{{ errMessage() }}</p>
+  }
+
+  @if (createdFashion(); as created) {
+    <p class="success" role="status">
+      Fashion created. ID: {{ created._id }}
+      <a [routerLink]="['/fashion-detail', created._id]">View fashion</a>
+    </p>
+  }
+</section>

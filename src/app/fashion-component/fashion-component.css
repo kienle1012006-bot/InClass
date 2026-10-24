@@ -1,0 +1,24 @@
+:host { display: block; color: #25231f; }
+.collection-page { max-width: 1240px; margin: 0 auto; padding: 64px 28px 88px; }
+.collection-heading { margin-bottom: 38px; text-align: center; }
+.eyebrow, .card-style { color: #8b7560; font-size: .68rem; font-weight: 700; letter-spacing: .19em; }
+.collection-heading h1 { margin: 10px 0; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(2.3rem, 5vw, 3.8rem); font-weight: 400; letter-spacing: -.04em; }
+.collection-intro { margin: 0; color: #77736e; font-size: .98rem; }
+.fashion-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 34px 24px; }
+.fashion-card { min-width: 0; overflow: hidden; background: #fff; }
+.card-link { display: block; color: inherit; text-decoration: none; }
+.image-frame { aspect-ratio: 4 / 5; overflow: hidden; background: #f1eee9; }
+.image-frame img { width: 100%; height: 100%; display: block; object-fit: cover; transition: transform .45s ease; }
+.fashion-card:hover .image-frame img { transform: scale(1.035); }
+.image-placeholder { height: 100%; display: grid; place-items: center; color: #a59a8e; font: 1rem Georgia, serif; letter-spacing: .18em; }
+.card-copy { padding: 16px 2px 4px; }
+.card-style { margin: 0 0 7px; font-size: .62rem; }
+.card-copy h2 { margin: 0 0 7px; font: 400 1.24rem Georgia, 'Times New Roman', serif; }
+.card-detail { display: -webkit-box; overflow: hidden; margin: 0 0 10px; color: #77736e; font-size: .83rem; line-height: 1.5; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
+.card-slug { display: block; overflow: hidden; color: #99918a; font: .7rem ui-monospace, monospace; text-overflow: ellipsis; white-space: nowrap; }
+.detail-link { display: inline-block; margin-top: 14px; padding-bottom: 4px; border-bottom: 1px solid #a9947d; color: #40372e; font-size: .76rem; letter-spacing: .04em; }
+.detail-link span { margin-left: 6px; }
+.notice { padding: 20px; color: #766d63; text-align: center; }
+.error { color: #a63c31; }
+@media (max-width: 850px) { .fashion-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 18px; } .collection-page { padding: 48px 22px 64px; } }
+@media (max-width: 520px) { .fashion-grid { grid-template-columns: 1fr; gap: 26px; } .collection-page { padding: 36px 16px 48px; } .collection-heading { margin-bottom: 28px; } }

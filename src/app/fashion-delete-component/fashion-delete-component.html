@@ -1,0 +1,50 @@
+<section class="fashion-delete">
+  <h2>Delete a Fashion</h2>
+
+  @if (isLoading()) {
+    <p>Loading fashions…</p>
+  }
+
+  @if (errMessage()) {
+    <p class="error" role="alert">{{ errMessage() }}</p>
+  }
+
+  @if (!isLoading() && fashions().length === 0 && !errMessage()) {
+    <p>No fashions to display.</p>
+  }
+
+  @if (fashions().length > 0) {
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Fashion Subject</th>
+            <th>Fashion Detail</th>
+            <th>Image</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (fashion of fashions(); track fashion._id) {
+            <tr>
+              <td>{{ fashion._id }}</td>
+              <td>{{ fashion.fashion_subject }}</td>
+              <td>{{ fashion.fashion_detail }}</td>
+              <td>
+                @if (fashion.fashion_image) {
+                  <img [src]="fashion.getBase64String()" alt="Fashion image" />
+                }
+              </td>
+              <td>
+                <button type="button" (click)="deleteFashion(fashion._id)" [disabled]="deletingId() !== null">
+                  {{ deletingId() === fashion._id ? 'Deleting…' : 'Delete' }}
+                </button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</section>

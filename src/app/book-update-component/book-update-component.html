@@ -1,0 +1,59 @@
+<p>{{errMessage()}}</p>
+<p>{{message()}}</p>
+
+<table>
+  <tr>
+    <td>Book Id:</td>
+    <td><input type="text" [(ngModel)]="book.BookId" readonly></td>
+  </tr>
+  <tr>
+    <td>Book Name:</td>
+    <td><input type="text" [(ngModel)]="book.BookName"></td>
+  </tr>
+  <tr>
+    <td>Price:</td>
+    <td><input type="number" [(ngModel)]="book.Price"></td>
+  </tr>
+  <tr>
+    <td>Image:</td>
+    <td><input type="file" accept="image/*" (change)="onFileSelected($event)"></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>
+      @if (imagePreview()) {
+        <img [src]="imagePreview()" width="100">
+      } @else if (book.Image) {
+        <img src="{{server_images_link}}/{{book.Image}}" width="100">
+      }
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <button (click)="updateBook()">Update Book</button>
+    </td>
+  </tr>
+</table>
+
+<table border="1">
+  <tr>
+    <td>BookId</td>
+    <td>BookName</td>
+    <td>Price</td>
+    <td>Image</td>
+  </tr>
+  <tbody>
+    @for (item of books(); track item.BookId) {
+      <tr (click)="selectBook(item)">
+        <td>{{item.BookId}}</td>
+        <td>{{item.BookName}}</td>
+        <td>{{item.Price}}</td>
+        <td><img src="{{server_images_link}}/{{item.Image}}" width="50" height="50"></td>
+      </tr>
+    } @empty {
+      <tr>
+        <td colspan="4">Not found books</td>
+      </tr>
+    }
+  </tbody>
+</table>

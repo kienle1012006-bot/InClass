@@ -1,0 +1,108 @@
+<main class="search-page">
+  <header class="page-heading">
+    <p class="eyebrow">CHAPTER 7 · FASHION CATALOG</p>
+    <h1>SearchFashion</h1>
+    <p class="intro">Tìm Fashion theo tiêu đề hoặc nội dung, xếp hạng bằng Jaccard Similarity.</p>
+  </header>
+
+  <form class="search-panel" (ngSubmit)="search()">
+    <div class="query-field">
+      <label for="fashion-query">Từ khóa tìm kiếm</label>
+      <input
+        id="fashion-query"
+        name="query"
+        type="search"
+        [(ngModel)]="query"
+        placeholder="Ví dụ: street style Paris"
+        autocomplete="off"
+      />
+    </div>
+
+    <div class="control-field">
+      <label for="search-field">Tìm trong</label>
+      <select id="search-field" name="searchField" [(ngModel)]="searchField">
+        <option value="fashion_subject">fashion_subject</option>
+        <option value="fashion_detail">fashion_detail</option>
+      </select>
+    </div>
+
+    <div class="control-field count-field">
+      <label for="result-limit">Số kết quả</label>
+      <select id="result-limit" name="resultLimit" [(ngModel)]="resultLimit">
+        <option [ngValue]="5">5 kết quả</option>
+        <option [ngValue]="10">10 kết quả</option>
+        <option [ngValue]="20">20 kết quả</option>
+        <option [ngValue]="50">50 kết quả</option>
+        <option [ngValue]="100">100 kết quả</option>
+      </select>
+    </div>
+
+    <button type="submit" [disabled]="isLoading()">
+      <span aria-hidden="true">⌕</span> Tìm kiếm
+    </button>
+  </form>
+
+  <section class="results-section" aria-live="polite">
+    <div class="results-heading">
+      <div>
+        <h2>Kết quả tìm kiếm</h2>
+        @if (hasSearched() && !errMessage()) {
+          <p>{{ results().length }} Fashion phù hợp · sắp xếp theo độ tương đồng giảm dần</p>
+        } @else {
+          <p>Chọn trường dữ liệu, nhập từ khóa và số lượng kết quả muốn xem.</p>
+        }
+      </div>
+      <div class="legend" aria-label="Mức độ tương đồng">
+        <span><i class="legend-dot high"></i> 0.75–1</span>
+        <span><i class="legend-dot medium"></i> 0.50–&lt;0.75</span>
+        <span><i class="legend-dot low"></i> &lt;0.50</span>
+      </div>
+    </div>
+
+    @if (isLoading()) {
+      <div class="empty-state">Đang tải dữ liệu Fashion…</div>
+    } @else if (errMessage()) {
+      <div class="empty-state error" role="alert">{{ errMessage() }}</div>
+    } @else if (hasSearched() && results().length === 0) {
+      <div class="empty-state">Không tìm thấy Fashion nào có từ khóa trùng khớp.</div>
+    } @else if (!hasSearched()) {
+      <div class="empty-state prompt-state">Nhập từ khóa để bắt đầu tìm kiếm.</div>
+    } @else {
+      <div class="table-shell">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Id</th>
+              <th scope="col">Style</th>
+              <th scope="col">fashion_subject</th>
+              <th scope="col">fashion_detail</th>
+              <th scope="col">Image</th>
+              <th scope="col" class="score-column">Jaccard Similarity</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (fashion of results(); track fashion._id) {
+              <tr [class]="rowClass(fashion.similarity)">
+                <td class="id-cell">{{ fashion._id }}</td>
+                <td><span class="style-pill">{{ fashion.style || '—' }}</span></td>
+                <td class="subject-cell">{{ fashion.fashion_subject }}</td>
+                <td class="detail-cell">{{ fashion.fashion_detail }}</td>
+                <td>
+                  @if (fashion.fashion_image) {
+                    <img class="fashion-image" [src]="fashion.getBase64String()" [alt]="fashion.fashion_subject" />
+                  } @else {
+                    <span class="no-image">No image</span>
+                  }
+                </td>
+                <td class="score-cell">
+                  <strong>{{ fashion.similarity | percent:'1.0-1' }}</strong>
+                  <span>{{ fashion.similarity | number:'1.3-3' }}</span>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+  </section>
+</main>

@@ -1,0 +1,36 @@
+.fashion-delete {
+  margin: 1rem auto;
+  padding: 1rem;
+  max-width: 1100px;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  border: 1px solid #bbb;
+  padding: 0.5rem;
+  text-align: left;
+}
+
+img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+
+button {
+  padding: 0.45rem 0.7rem;
+  cursor: pointer;
+}
+
+.error {
+  color: #b00020;
+}

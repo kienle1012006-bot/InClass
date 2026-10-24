@@ -1,0 +1,24 @@
+<p>binding-event-component works!</p>
+<table>
+  <tr>
+    <td colspan="2">Phương trình bậc 1</td>
+  </tr>
+  <tr>
+    <td>Hệ số a:</td>
+    <td><input type="number" [value]="hsa" /></td>
+  </tr>
+  <tr>
+    <td>Hệ số b:</td>
+    <td><input type="number" [value]="hsb" /></td>
+  </tr>
+  <tr>
+    <td>Kết quả</td>
+    <td id="tdketqua">{{ ketQua }}</td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <button (click)="giaiPt()">Giải</button>
+      <button (click)="reset()">PT mới</button>
+    </td>
+  </tr>
+</table>

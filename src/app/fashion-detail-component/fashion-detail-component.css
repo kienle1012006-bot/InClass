@@ -1,0 +1,25 @@
+:host { display: block; color: #25231f; }
+.detail-page { max-width: 1150px; margin: 0 auto; padding: 34px 28px 80px; }
+.back-link { display: inline-block; margin-bottom: 25px; color: #62594f; font-size: .82rem; text-decoration: none; }
+.back-link:hover { color: #171512; }
+.detail-layout { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(300px, .9fr); align-items: start; gap: clamp(32px, 7vw, 84px); }
+.detail-image { min-height: 320px; aspect-ratio: 4 / 5; overflow: hidden; background: #f1eee9; }
+.detail-image img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.image-placeholder { height: 100%; min-height: 320px; display: grid; place-items: center; color: #a59a8e; font: 1rem Georgia, serif; letter-spacing: .18em; }
+.detail-copy { padding: 28px 0; }
+.eyebrow { margin: 0 0 12px; color: #8b7560; font-size: .68rem; font-weight: 700; letter-spacing: .19em; text-transform: uppercase; }
+h1 { margin: 0 0 12px; font: 400 clamp(2rem, 4vw, 3.3rem) Georgia, 'Times New Roman', serif; letter-spacing: -.04em; }
+.product-id { color: #817a72; font-size: .82rem; }
+.product-id strong { margin-left: 8px; color: #38332d; }
+.rule { height: 1px; margin: 24px 0; background: #e5e0da; }
+h2 { margin: 0 0 12px; font: 400 1.05rem Arial, Helvetica, sans-serif; }
+.product-description { color: #69645e; font-size: .94rem; line-height: 1.8; }
+.product-meta { margin: 26px 0; border-top: 1px solid #e8e3dd; }
+.product-meta div { display: grid; grid-template-columns: 78px 1fr; gap: 12px; padding: 11px 0; border-bottom: 1px solid #e8e3dd; font-size: .78rem; }
+.product-meta dt { color: #8d857c; }
+.product-meta dd { margin: 0; overflow-wrap: anywhere; color: #403a34; }
+.button-link { display: inline-block; padding: 12px 17px; border: 1px solid #463e36; color: #332d27; font-size: .76rem; letter-spacing: .04em; text-decoration: none; transition: background .2s, color .2s; }
+.button-link:hover { background: #332d27; color: #fff; }
+.not-found { padding: 80px 12px; text-align: center; }
+.not-found h1 { margin-bottom: 22px; font-size: clamp(1.8rem, 4vw, 2.6rem); }
+@media (max-width: 700px) { .detail-page { padding: 25px 16px 50px; } .detail-layout { grid-template-columns: 1fr; gap: 14px; } .detail-image { aspect-ratio: 4 / 4.5; } .detail-copy { padding: 20px 2px; } }
